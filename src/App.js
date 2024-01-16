@@ -1,17 +1,16 @@
 import React from 'react';
 import './App.css';
-import UserContext from './UserContext';
-import UserDashboard from './UserDashboard';
+import Counter from './Counter';
+import useFetch from './useFetch';
 
 function App() {
-  const user = { name: 'Jane Smith', email: 'jane@example.com' };
+  const { data, loading } = useFetch('https://jsonplaceholder.typicode.com/todos/1');
 
   return (
     <div className="App">
-      <h1>Context API Demo</h1>
-      <UserContext.Provider value={user}>
-        <UserDashboard />
-      </UserContext.Provider>
+      <h1>State Management Demo</h1>
+      <Counter />
+      {loading ? <p>Loading...</p> : <p>Title: {data.title}</p>}
     </div>
   );
 }
